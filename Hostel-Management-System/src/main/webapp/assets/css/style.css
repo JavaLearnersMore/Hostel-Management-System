@@ -1,0 +1,139 @@
+:root {
+    --primary: #3498db;
+    --bg-light: #f5f6fa;
+    --bg-dark: #1e1e2f;
+    --text-light: #2c3e50;
+    --text-dark: #ffffff;
+}
+
+body {
+    margin: 0;
+    font-family: "Segoe UI", sans-serif;
+    min-height: 100vh;
+    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5))
+/*                 url("../images/bg.jpg") center/cover no-repeat; */
+}
+
+/* ---------- DARK MODE ---------- */
+body.dark {
+    background: var(--bg-dark);
+    color: var(--text-dark);
+}
+
+/* ---------- NAVBAR ---------- */
+.navbar {
+    background: var(--primary);
+    color: white;
+    padding: 12px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    margin-left: 15px;
+    font-weight: 500;
+}
+
+/* ---------- FOOTER ---------- */
+.footer {
+    text-align: center;
+    padding: 10px;
+    background: #2c3e50;
+    color: white;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+/* ---------- CARD ---------- */
+.card {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    width: 380px;
+    margin: 80px auto;
+}
+
+body.dark .card {
+    background: #2a2a40;
+}
+
+/* ---------- BUTTON ---------- */
+button {
+    width: 100%;
+    padding: 12px;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Animated hover */
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.3);
+}
+
+/* ---------- DASHBOARD ---------- */
+.dashboard {
+    width: 90%;
+    max-width: 900px;
+}
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 600px) {
+    .card {
+        width: 90%;
+    }
+}
+
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 50px;
+    width: 220px;
+    height: 100%;
+    background: #2c3e50;
+    padding: 20px;
+}
+
+.sidebar h3 {
+    color: white;
+    margin-bottom: 20px;
+}
+
+.sidebar a {
+    display: block;
+    color: #ecf0f1;
+    padding: 10px;
+    text-decoration: none;
+}
+
+.sidebar a:hover {
+    background: #3498db;
+}
+
+.spinner {
+    width: 16px;
+    height: 16px;
+    border: 2px solid #fff;
+    border-top: 2px solid transparent;
+    border-radius: 50%;
+    display: inline-block;
+    animation: spin 0.8s linear infinite;
+    margin-right: 6px;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+button.loading {
+    opacity: 0.8;
+    cursor: not-allowed;
+}
