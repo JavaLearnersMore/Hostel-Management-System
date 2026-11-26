@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.hostel.entity.Attendance;
 import com.hostel.entity.Student;
+import com.hostel.exception.ResourceNotFoundException;
 import com.hostel.repository.AttendanceRepository;
 import com.hostel.repository.StudentRepository;
 
@@ -31,8 +32,8 @@ public class AttendanceService {
     public void markAttendance(Long studentId, String status) {
 
     	  Student student = studentRepo.findById(studentId)
-    	            .orElseThrow(() -> new RuntimeException("Student not found"));
-
+    			  .orElseThrow(() -> new ResourceNotFoundException(
+  	                    "Student not found with this id: " + studentId)); 
     	    LocalDate today = LocalDate.now();
 
     	    Optional<Attendance> optional =
@@ -87,13 +88,19 @@ public class AttendanceService {
 
 	public void deleteById(Long id) {
 		// TODO Auto-generated method stub
-        attendanceRepo.deleteById(id);
-
+        //attendanceRepo.deleteById(id);
+		if (!attendanceRepo.existsById(id)) {
+	        throw new ResourceNotFoundException("Student attendance not found with this id: " + id);
+	    }
+	    attendanceRepo.deleteById(id);
 	}
+
+
 
 	public Attendance getById(Long id) {
 		return attendanceRepo.findById(id)
-	            .orElseThrow(() -> new RuntimeException("Attendance not found"));
+				.orElseThrow(() -> new ResourceNotFoundException(
+  	                    "Student Attendence not found with this id: " + id)); 
 	
 	}
 

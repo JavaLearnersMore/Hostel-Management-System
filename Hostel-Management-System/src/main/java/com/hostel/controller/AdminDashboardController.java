@@ -17,6 +17,7 @@ import com.hostel.entity.Attendance;
 import com.hostel.entity.LeaveRequest;
 import com.hostel.entity.Room;
 import com.hostel.entity.Visitor;
+import com.hostel.exception.ResourceNotFoundException;
 import com.hostel.repository.LeaveRepository;
 import com.hostel.repository.VisitorRepository;
 import com.hostel.service.AttendanceService;
@@ -120,7 +121,9 @@ public class AdminDashboardController {
    public String deleteleaves(@PathVariable Long id, Principal principal) {
 
 	   LeaveRequest leave = leaveRepository.findById(id)
-	            .orElseThrow(() -> new RuntimeException("Leave request not found"));
+	            .orElseThrow(() -> new ResourceNotFoundException(
+	                    "Leave request not found with ID: " + id
+	                    ));
 
 	    leave.setStatus("REJECTED");
 
@@ -135,7 +138,8 @@ public class AdminDashboardController {
    public String approveLeaves(@PathVariable Long id, Principal principal) {
 
 	   LeaveRequest leave = leaveRepository.findById(id)
-	            .orElseThrow(() -> new RuntimeException("Leave request not found"));
+	            .orElseThrow(() -> new ResourceNotFoundException(
+	                    "Leave request not found with ID: " + id));
 
 	    leave.setStatus("APPROVED");
 

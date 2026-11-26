@@ -7,6 +7,7 @@ import org.springframework.security.core.userdetails.*;
 import org.springframework.stereotype.Service;
 
 import com.hostel.entity.User;
+import com.hostel.exception.ResourceNotFoundException;
 import com.hostel.repository.UserRepository;
 
 @Service
@@ -23,8 +24,8 @@ public class CustomUserDetailsService implements UserDetailsService {
             throws UsernameNotFoundException {
 
         User user = userRepository.findByUsername(username)
-                .orElseThrow(() ->
-                        new UsernameNotFoundException("User not found"));
+        		.orElseThrow(() -> new ResourceNotFoundException(
+  	                    "User not found with this id: " + username)); 
 
         return new org.springframework.security.core.userdetails.User(
                 user.getUsername(),

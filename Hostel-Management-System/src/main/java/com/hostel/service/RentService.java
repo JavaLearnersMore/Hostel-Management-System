@@ -12,6 +12,23 @@ public class RentService {
 
     public double calculateRent(RoomBooking booking){
 
+    	
+    	if (booking == null) {
+            throw new IllegalArgumentException(
+                    "Room booking cannot be null");
+        }
+
+        if (booking.getStartDate() == null) {
+            throw new IllegalArgumentException(
+                    "Booking start date cannot be null");
+        }
+
+        if (booking.getRoom() == null) {
+            throw new IllegalArgumentException(
+                    "Room is not assigned to this booking");
+        }
+
+    	
         long days = ChronoUnit.DAYS.between(
                 booking.getStartDate(),
                 LocalDate.now()

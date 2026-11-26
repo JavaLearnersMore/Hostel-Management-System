@@ -26,7 +26,7 @@ public class UserService  implements UserDetailsService{
         
         User optionalUser = repository.findByUsername(username)
                 .orElseThrow(() ->
-                        new UsernameNotFoundException("User not found"));
+                        new UsernameNotFoundException("User not found with this username :" +username));
 
         if (optionalUser == null) {
             return null;
@@ -47,11 +47,11 @@ public class UserService  implements UserDetailsService{
         
         User user = repository.findByUsername(username)
                 .orElseThrow(() ->
-                        new UsernameNotFoundException("User not found"));
+                        new UsernameNotFoundException("User not found with this username :" +username));
         
 
         if (user == null) {
-            throw new UsernameNotFoundException("User not found");
+            throw new UsernameNotFoundException("User not found with this username :" +username);
         }
 
         return org.springframework.security.core.userdetails.User

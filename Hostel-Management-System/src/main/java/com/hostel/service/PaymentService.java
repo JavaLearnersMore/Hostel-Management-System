@@ -38,12 +38,24 @@ public class PaymentService {
 
     // ✅ TOTAL PAID BY STUDENT
     public double getTotalPaidByStudent(Long studentId) {
+    	
+    	if (studentId == null) {
+            throw new IllegalArgumentException(
+                    "Student ID cannot be null");
+        }
+    	
         Double paid = paymentRepository.getTotalPaidByStudent(studentId);
         return paid == null ? 0 : paid;
     }
 
     // ✅ PENDING FEES
     public double getPendingFees(Long studentId) {
+    	
+    	if (studentId == null) {
+            throw new IllegalArgumentException(
+                    "Student ID cannot be null");
+        }
+    	
         Double pending = paymentRepository.getPendingAmount(studentId);
         return pending == null ? 0 : pending;
     }

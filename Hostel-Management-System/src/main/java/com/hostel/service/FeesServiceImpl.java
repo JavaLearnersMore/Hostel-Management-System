@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hostel.entity.Fees;
+import com.hostel.exception.ResourceNotFoundException;
 import com.hostel.repository.FeesRepository;
 import com.hostel.service.FeesService;
 
@@ -21,14 +22,20 @@ public class FeesServiceImpl implements FeesService {
 
 	@Override
 	public void deleteById(Long id) {
-		// TODO Auto-generated method stub
-		feesRepository.deleteById(id);
+		
+		 Fees fee = feesRepository.findById(id)
+	                .orElseThrow(() -> new ResourceNotFoundException(
+	                        "Fee record not found with ID: " + id));
+		
+		feesRepository.delete(fee);
+		//feesRepository.deleteById(id);
 	}
     
 	@Override
 	public Fees getById(Long id) {
 	    return feesRepository.findById(id)
-	            .orElseThrow(() -> new RuntimeException("Fee not found"));
+	    		.orElseThrow(() -> new ResourceNotFoundException(
+  	                    "fees not found with this id: " + id)); 
 	}
 
 	@Override
